@@ -19,6 +19,11 @@ const userSchema=mongoose.Schema({
 
         
     },
+    profileImage: {
+        type: String,
+        required: false,
+        default: "",
+      },
 },{timestamps:true});
 
 userSchema.pre('save',async function(next){

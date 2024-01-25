@@ -2,16 +2,18 @@ import { Link, useNavigate } from "react-router-dom";
 import {Form,Button } from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 
-import React from 'react'
 
-import { useState,useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { useDispatch,useSelector } from "react-redux";
 import {toast} from 'react-toastify'
 
-import { setCredentials } from '../slices/authSlice';
+import { setCredentials} from '../slices/authSlice';
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
 
 const  ProfileScreen = () => {
+  const [profileImage, setProfileImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+
 
     const[name,setName]=useState('')
      const[email,setEmail]=useState('')
@@ -25,11 +27,20 @@ const {userInfo}=useSelector((state)=>state.auth)
 
 const[updateProfile,{isLoading}]=useUpdateUserMutation();
 
+
 useEffect(()=>{
   setName(userInfo.name);
   setEmail(userInfo.email)
-},[userInfo.setName,userInfo.setEmail])
+  setProfileImage(userInfo.profileImage)
 
+},[userInfo.setName,userInfo.setEmail,userInfo.setProfileImage])
+
+
+const handleImageChange = (e) => {
+  const file = e.target.files[0];
+  setProfileImage(file);
+  setPreviewImage(URL.createObjectURL(file));
+};
 
     const submitHandler=async(e)=>{
         e.preventDefault();
@@ -37,12 +48,18 @@ useEffect(()=>{
        toast.error("Passwords not match")
       }else{
        try{
+
+        const formData = new FormData();
+        formData.append('profileImage', profileImage);
+
     const res=await updateProfile({
         _id:userInfo._id,
         name,
         email,
-        password
+        password,
+       profileImage :formData       
     }).unwrap()
+
     dispatch(setCredentials({...res}));
     toast.success('profile updated')
    }catch(err){
@@ -56,7 +73,27 @@ useEffect(()=>{
   return (
     <FormContainer>
       <h1>Update Profile</h1>
+
+      {previewImage && (
+        <img
+          src={previewImage}
+          alt="Profile Preview"
+          style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+        />
+      )}
+
+
       <Form onSubmit={submitHandler}>
+
+    
+      <Form.Group className="my-2" controlId="profileImage">
+          <Form.Label>Profile Image</Form.Label>
+          <Form.Control
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+        </Form.Group>
 
       <Form.Group className='my-2' controlId="name">
         <Form.Label>Name</Form.Label>

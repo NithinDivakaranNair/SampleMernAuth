@@ -20,6 +20,11 @@ import ProfileScreen from './screens/ProfileScreen.jsx';
 
 import PrivateRoute from './screens/PrivateRoute.jsx';
 
+import AdminLoginScreen from './screens/AdminLogin.jsx';
+import AdminUserDetails from './screens/AdminUserDetails.jsx';
+import Usertable from './components/Usertable.jsx';
+import AddUser from './components/AddUser.jsx';
+
 const router=createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
@@ -27,11 +32,17 @@ const router=createBrowserRouter(
    <Route  path='/login' element={<LoginScreen/>}/>
    <Route  path='/register' element={<RegisterScreen/>}/>
 
-   {/*Private Routes*/}
+   {/* User Private Routes*/}
    <Route path='' element={<PrivateRoute/>}>
    <Route  path='/profile' element={<ProfileScreen/>}/>
    </Route>
 
+{/* Admin Private Routes*/}
+ 
+ <Route path='/adminlogin' element={<AdminLoginScreen/>}/>
+ <Route path='/adminuserdetails' element={<AdminUserDetails/>}/>
+ <Route path='/usertable' element={<Usertable/>}/>
+ <Route path='/createuser' element={<AddUser/>}/>
     </Route>
   )
 )
