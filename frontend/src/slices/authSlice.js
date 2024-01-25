@@ -17,14 +17,14 @@ const authSlice = createSlice({
       state.userInfo = action.payload;
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(action.payload));
     },
-    updateImage: (state, action) => {
-      const updatedUserInfo = {
-        ...state.userInfo,
-        image: action.payload,
-      };
-      state.userInfo = updatedUserInfo;
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedUserInfo));
-    },
+    // updateImage: (state, action) => {
+    //   const updatedUserInfo = {
+    //     ...state.userInfo,
+    //     image: action.payload,
+    //   };
+    //   state.userInfo = updatedUserInfo;
+    //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedUserInfo));
+    // },
     logout: (state, action) => {
       state.userInfo = null;
       localStorage.removeItem(LOCAL_STORAGE_KEY);
@@ -32,5 +32,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout, updateImage } = authSlice.actions;
+export const { setCredentials, logout } = authSlice.actions;
 export default authSlice.reducer;

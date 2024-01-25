@@ -19,7 +19,7 @@ const userSchema=mongoose.Schema({
 
         
     },
-    profileImage: {
+    imageURL: {
         type: String,
         required: false,
         default: "",

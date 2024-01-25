@@ -35,10 +35,17 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
 
    
+    upload: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/upload`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
 
 
   }),
 });
 
 // Correctly import the generated hook with the 'use' prefix
-export const { useLoginMutation,useLogoutMutation,useRegisterMutation,useUpdateUserMutation } = userApiSlice;
+export const { useLoginMutation,useLogoutMutation,useRegisterMutation,useUpdateUserMutation,useUploadMutation } = userApiSlice;

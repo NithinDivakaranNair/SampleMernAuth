@@ -17,7 +17,7 @@ const authUser=asyncHandler(async(req,res)=>{
             _id:user._id,
             name:user.name,
             email:user.email,
-            image:user.profileImage
+            image:user.imageURL
         })
     }else{
         res.status(401);
@@ -94,11 +94,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.imageURL = req.body.imageUrl || user.imageURL;
 
-    // Check if req.file is defined before accessing its properties
-    if (req.file && req.file.path) {
-      user.profileImage = req.file.path;
-    }
+   
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -109,7 +107,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      profileImage: updatedUser.profileImage,
+      image: updatedUser.imageURL,
     });
   } else {
     res.status(404);
