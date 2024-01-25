@@ -1,4 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
@@ -7,12 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { setCredentials } from "../slices/authSlice";
-import {
-  useUpdateUserMutation,
-  useUploadMutation,
-} from "../slices/usersApiSlice";
+import { useUpdateUserMutation} from "../slices/usersApiSlice";
 
-const ProfileScreen = () => {
+    const ProfileScreen = () => {
+
   const [image, setImage] = useState(null);
 
   const [name, setName] = useState("");
@@ -20,24 +17,20 @@ const ProfileScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.auth);
 
   const [updateProfile, { isLoading }] = useUpdateUserMutation();
-  const [upload] = useUploadMutation();
 
   useEffect(() => {
     setName(userInfo.name);
     setEmail(userInfo.email);
   }, [userInfo.setName, userInfo.setEmail]);
 
-  console.log("This is the userINDOR",userInfo)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    // setImage(URL.createObjectURL(file));
   };
 
   const submitHandler = async (e) => {
@@ -47,14 +40,11 @@ const ProfileScreen = () => {
     } else {
       try {
         let imageUrl;
-        console.log('This is the Imgga',image);
         if (image) {
-          console.log("iiimage", image);
           // Create a new FormData instance
           const formData = new FormData();
           formData.append("avatar", image);
-          console.log("formData", formData);
-          // Send the image to th  e server
+          // Send the image to the server
            const imageResponse = await fetch(
             "http://localhost:5000/api/users/upload",
             {
@@ -62,7 +52,6 @@ const ProfileScreen = () => {
               body: formData,
             }
           );
-          // const imageResponse = await upload(formData).unwrap();
           if (!imageResponse.ok) {
             toast.error("Error uploading image");
             return;
@@ -96,7 +85,7 @@ const ProfileScreen = () => {
 
       {userInfo.image ? (
         <img
-          src={`http://localhost:5000/${userInfo.image}`}
+          src={`http://localhost:5000/${userInfo.image}`} //image acees to backend http://localhost:5000/ formalt
           alt="Profile Preview"
           style={{ width: "100px", height: "100px", objectFit: "cover" }}
         />
@@ -157,6 +146,7 @@ const ProfileScreen = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+        
         {isLoading && <h1>loading..</h1>}
 
         <Button type="submit" variant="primary" className="mt-3">

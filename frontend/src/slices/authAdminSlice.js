@@ -1,7 +1,7 @@
 // authSliceAdmin.js
 import { createSlice } from "@reduxjs/toolkit";
 
-const LOCAL_STORAGE_KEY = 'adminInfo';  // Use a unique key for admin
+const LOCAL_STORAGE_KEY = "adminInfo"; // Use a unique key for admin
 
 const initialState = {
   adminInfo: localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const authSliceAdmin = createSlice({
-  name: 'authAdmin',
+  name: "authAdmin",
   initialState,
   reducers: {
     setCredentials: (state, action) => {

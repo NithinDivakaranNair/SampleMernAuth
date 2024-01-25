@@ -8,9 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("USERInfo",{userInfo});
   
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,6 +35,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+             
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">
@@ -52,9 +51,9 @@ const Header = () => {
                   <LinkContainer to="/register">
                     <Nav.Link>Sign Up</Nav.Link>
                   </LinkContainer>
-               
-                </>
+               </>
               )}
+            
             </Nav>
           </Navbar.Collapse>
         </Container>

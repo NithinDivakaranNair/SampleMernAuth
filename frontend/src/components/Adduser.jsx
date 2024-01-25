@@ -4,8 +4,8 @@ import FormContainer from '../components/FormContainer'
 
 import React from 'react'
 
-import { useState,useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {toast} from 'react-toastify'
 
 import { useCreateUserMutation } from "../slices/adminApiSlice";
@@ -23,26 +23,24 @@ const RegisterScreen = () => {
     const dispatch=useDispatch();
 
 
-const [register, { isLoading }] = useCreateUserMutation();
+    const [register, { isLoading }] = useCreateUserMutation();
 
 
-
-
-    const submitHandler=async(e)=>{
+     const submitHandler=async(e)=>{
         e.preventDefault();
-if(password!==confirmPassword){
-  toast.error("Passwords not match")
-}else{
-  try{
-    const res=await register({name, email,password}).unwrap();
+     if(password!==confirmPassword){
+      toast.error("Passwords not match")
+       }else{
+       try{
+     const res=await register({name, email,password}).unwrap();
     dispatch(setCredentials({...res}))
     navigate('/usertable')
-  }catch(err){
+       }catch(err){
     toast.error(err?.data?.message||err.error);
 
-  }
-   }
-    }
+       }
+        }
+         }
 
 
     return (
@@ -86,15 +84,13 @@ if(password!==confirmPassword){
        </Form.Control>
       </Form.Group>
 
-{isLoading&& <h1>loading...</h1>}
+     {isLoading&& <h1>loading...</h1>}
 
      <Button type="submit" variant="primary" className="mt-3">
         Add User
      </Button>
       
-    
-
-      </Form>
+    </Form>
     </FormContainer>
   )
 }

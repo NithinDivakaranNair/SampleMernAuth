@@ -16,8 +16,7 @@ const AdminHeader = () => {
 
   const [logoutadmin] = useLogoutadminMutation();
 
-
-
+   
   const adminLogoutHandler = async () => {
     try {
       await logoutadmin().unwrap();
@@ -38,19 +37,19 @@ const AdminHeader = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              
               { adminInfo ? (
                 <NavDropdown title={adminInfo.name} id="adminUsername">
-                  {/* Add admin-specific links here */}
                   <NavDropdown.Item onClick={adminLogoutHandler}>Admin logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <>
-                  
-                  <LinkContainer to="/adminlogin">
+                   <LinkContainer to="/adminlogin">
                     <Nav.Link>Admin login</Nav.Link>
                   </LinkContainer>
                 </>
               )}
+              
             </Nav>
           </Navbar.Collapse>
         </Container>

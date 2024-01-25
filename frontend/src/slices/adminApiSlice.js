@@ -1,4 +1,4 @@
-import { apiSlice } from './apiSlice';
+import { apiSlice } from "./apiSlice";
 const ADMIN_URL = "/api/admin";
 
 export const adminapiSlice = apiSlice.injectEndpoints({
@@ -6,32 +6,30 @@ export const adminapiSlice = apiSlice.injectEndpoints({
     loginadmin: builder.mutation({
       query: (data) => ({
         url: `${ADMIN_URL}/login`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
     }),
 
-    logoutadmin:builder.mutation({
-      query:(data)=>({
-        url:`${ADMIN_URL}/logoutAdmin`,
-        method:"POST"
-      })
+    logoutadmin: builder.mutation({
+      query: (data) => ({
+        url: `${ADMIN_URL}/logoutAdmin`,
+        method: "POST",
+      }),
     }),
-
-
 
     deleteUser: builder.mutation({
       query: (id, data) => ({
         url: `${ADMIN_URL}/user/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
         body: data,
       }),
     }),
 
     editUser: builder.mutation({
-      query: ( data) => ({
+      query: (data) => ({
         url: `${ADMIN_URL}/user`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
       }),
     }),
@@ -39,14 +37,18 @@ export const adminapiSlice = apiSlice.injectEndpoints({
     CreateUser: builder.mutation({
       query: (data) => ({
         url: `${ADMIN_URL}/adduser`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
-    }),   
-
-
+    }),
   }),
 });
 
 // Correctly import the generated hook with the 'use' prefix
-export const { useDeleteUserMutation,useEditUserMutation,useLoginadminMutation,useLogoutadminMutation,useCreateUserMutation } = adminapiSlice;
+export const {
+  useDeleteUserMutation,
+  useEditUserMutation,
+  useLoginadminMutation,
+  useLogoutadminMutation,
+  useCreateUserMutation,
+} = adminapiSlice;

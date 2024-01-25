@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import {Form,Button ,Row,Col} from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
+import {Form,Button } from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 
 import { useDispatch,useSelector } from "react-redux";
@@ -16,11 +16,10 @@ const AdminLoginScreen = () => {
 
 const navigate=useNavigate();
 const dispatch=useDispatch();
+
 const [loginadmin] = useLoginadminMutation();
-console.log("loginadmin",loginadmin);
 
 const {adminInfo}=useSelector((state)=>state.authAdmin)
-console.log('adminInfo00',{adminInfo});
 
  useEffect(()=>{
   if(adminInfo){
@@ -32,7 +31,6 @@ console.log('adminInfo00',{adminInfo});
         e.preventDefault();
        try{
         const res=await loginadmin({username,password}).unwrap();
-        console.log('res',res);
         dispatch(setCredentials({...res}))
         navigate('/adminuserdetails')
        }catch(err){

@@ -31,20 +31,20 @@ const Usertable = () => {
         console.log(userId);
         
         const res = await editUser({id: userId,
-            name: updatedUserData.name, // Assuming name is a property in updatedUserData
+            name: updatedUserData.name, 
             email: updatedUserData.email}).unwrap();
-        console.log('ress',res);
-        dispatch(setCredentials(res));
-
+       
+            dispatch(setCredentials(res));
           setEditedUserId(null);
           setEditedUserData({});
           
-    
-      };
+           };
 
     return (
     <div className='container'>
         <h2>All Users Details</h2>
+     
+     {/*Searching*/}
         <input
             className="mx-96"
             type="text"
@@ -52,7 +52,9 @@ const Usertable = () => {
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
           />
+
           <br></br>
+
           <Link to={'/createuser'} className='btn btn-success my-3'>Create +</Link>
         <table className='table'>
             <thead>
@@ -61,9 +63,8 @@ const Usertable = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Action</th>
+               </tr>
 
-
-                </tr>
             </thead>
              <tbody>
              {userdetails
@@ -74,61 +75,47 @@ const Usertable = () => {
               )
                 .map((user,index)=>(
                     <tr key={index}>
-    {/* <td> {user._id}</td> */}
-    
- <td>  {editedUserId === user._id ? (
-                      <input
-                        type="text"
-                        defaultValue={editedUserData.name || user.name}
-                        onChange={e =>
-                          setEditedUserData({
-                            ...editedUserData,
-                            name: e.target.value,
-                          })
-                        }  />
-                        ) : (
-                          user.name
-                        )}
+             {/* <td> {user._id}</td> */}
+     {/*enter name field */}
+             <td>  {editedUserId === user._id ? (
+             <input type="text"
+             defaultValue={editedUserData.name || user.name}
+               onChange={e =>
+          setEditedUserData({...editedUserData,name: e.target.value })
+                        }/>
+                        ) : (user.name)}
                         </td>
 
-
-    <td>  {editedUserId === user._id ? (
-                      <input
-                        type="email"
-                        defaultValue={editedUserData.email || user.email}
-                        onChange={e =>
-                          setEditedUserData({
-                            ...editedUserData,
-                            email: e.target.value,
-                          })
-                        }
-                      />
-                    ) : (
-                      user.email
-                    )}</td>
+              {/*enter email field */}
+              <td>  {editedUserId === user._id ? (
+              <input type="email"
+              defaultValue={editedUserData.email || user.email}
+                 onChange={e =>
+            setEditedUserData({...editedUserData,email: e.target.value})
+                        }/>
+                    ) : (user.email)}
+                    </td>
 
 
+                 {/*Edit and save button */}
+                 <td> {editedUserId === user._id ? (
+                <button className='btn btn-sm btn-primary'
+              onClick={() => handleEditUser(user._id, editedUserData)}>save</button>)
+                      :
+                 ( <>
+              <button className='btn btn-sm btn-primary'
+              onClick={() => setEditedUserId(user._id)}
+             //  disabled={userInfo._id === user._id}
+                >edit</button>
 
-<td>
-{editedUserId === user._id ? (
-    <button className='btn btn-sm btn-primary'
-     onClick={() => handleEditUser(user._id, editedUserData)}>save</button>)
-     :
-    ( <>
-    <button className='btn btn-sm btn-primary'
-     onClick={() => setEditedUserId(user._id)}
-    //  disabled={userInfo._id === user._id}
-     >edit</button>
-
-
-    <button className='btn btn-sm btn-danger ms-2'
-    onClick={() => handleDeleteUser(user._id)}
-    // disabled={userInfo._id === user._id}
-    >Delete</button>
-    </>
-    )}
-
-</td>
+             {/*delete button */}
+              <button className='btn btn-sm btn-danger ms-2'
+              onClick={() => handleDeleteUser(user._id)}
+             // disabled={userInfo._id === user._id}
+              >Delete</button>
+                 </>
+                )}
+                       </td>
 
                          
                     </tr>
