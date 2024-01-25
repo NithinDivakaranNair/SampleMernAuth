@@ -44,7 +44,7 @@ const Usertable = () => {
 
     return (
     <div className='container'>
-        <h2>crude</h2>
+        <h2>All Users Details</h2>
         <input
             className="mx-96"
             type="text"
@@ -53,11 +53,11 @@ const Usertable = () => {
             onChange={e => setSearchQuery(e.target.value)}
           />
           <br></br>
-        <Link to={'/createuser'} className='btn btn-sucess my-3'>Create +</Link>
+          <Link to={'/createuser'} className='btn btn-success my-3'>Create +</Link>
         <table className='table'>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    {/* <th>ID</th> */}
                     <th>Name</th>
                     <th>Email</th>
                     <th>Action</th>
@@ -74,7 +74,7 @@ const Usertable = () => {
               )
                 .map((user,index)=>(
                     <tr key={index}>
-    <td> {user.id}</td>
+    {/* <td> {user._id}</td> */}
     
  <td>  {editedUserId === user._id ? (
                       <input

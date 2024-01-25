@@ -46,16 +46,16 @@ console.log('adminInfo00',{adminInfo});
       <Form onSubmit={submitHandler}>
 
       <Form.Group className='my-2' controlId="email">
-        <Form.Label>Email Address</Form.Label>
+        <Form.Label> Name</Form.Label>
         <Form.Control type="text" 
-        placeholder="enter email" 
+        placeholder="enter name" 
         value={username}
         onChange={(e)=>setUsername(e.target.value)} >
        </Form.Control>
        </Form.Group>
 
        <Form.Group className='my-2' controlId="password">
-       <Form.Label>Password</Form.Label>
+       <Form.Label> Admin Password</Form.Label>
         <Form.Control type="password" 
         placeholder="enter password" 
         value={password}
