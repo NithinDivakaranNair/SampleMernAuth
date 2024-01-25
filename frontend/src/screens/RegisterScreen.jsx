@@ -5,11 +5,11 @@ import FormContainer from '../components/FormContainer'
 import React from 'react'
 
 import { useState,useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {toast} from 'react-toastify'
 
 import { useRegisterMutation } from "../slices/usersApiSlice";
-import { setCredentials } from '../slices/authSlice';
+// import { setCredentials } from '../slices/authSlice';
 
 
 const RegisterScreen = () => {
@@ -20,7 +20,7 @@ const RegisterScreen = () => {
     const[confirmPassword,setConfirmPassword]=useState('')
 
     const navigate=useNavigate();
-    const dispatch=useDispatch();
+    // const dispatch=useDispatch();
 
 const {userInfo}=useSelector((state)=>state.auth)
 
